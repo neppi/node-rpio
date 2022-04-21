@@ -1009,6 +1009,23 @@ Community benchmarks suggest that the cost for `usleep()` is 72 microseconds on
 raspi-3 and 130 microseconds on raspi-1, with latency reducing significantly
 after the first call.
 
+## Docker/Docker Compose
+
+If you want to use this library in a container you will face the problem of auto detecting the hardware. Mounting the files **/proc/device-tree/model** or **/sys/firmware/devicetree/base/model** will not work cause this are linux kernal files. To circumvent this you can use the environment var **DEVICE_MODEL_STRING** to override the content from  /proc/device-tree/model.
+
+i.e. for docker-compose.yml
+
+```yml
+version: '2.3'
+
+services:
+  myservice:
+    restart: always
+    image: 'image_with_gpio'
+    environment:
+      - DEVICE_MODEL_STRING="Raspberry Pi 4 Model B Rev 1.4" # extracted from '/sys/firmware/devicetree/base/model
+```
+
 ## Authors and licenses
 
 Mike McCauley wrote `src/bcm2835.{c,h}` which are under the GPL.
