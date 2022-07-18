@@ -1,4 +1,4 @@
-var rpio = require('../lib/rpio');
+var rpio = require("../lib/rpio");
 
 /*
  * Watch a button switch attached to the configured pin for changes.
@@ -21,30 +21,29 @@ rpio.open(pin, rpio.INPUT, rpio.PULL_UP);
  * the pin.  The argument is the pin that triggered the event, so you can use
  * the same callback for multiple pins.
  */
-function pollcb(cbpin)
-{
-	/*
-	 * It cannot be guaranteed that the current value of the pin is the
-	 * same that triggered the event, so the best we can do is notify the
-	 * user that an event happened and print what the value is currently
-	 * set to.
-	 *
-	 * Unless you are pressing the button faster than 1ms (the default
-	 * setInterval() loop which polls for events) this shouldn't be a
-	 * problem.
-	 *
-	 * If we read 1 then the pullup resistor is pulling the current high,
-	 * i.e. the switch is not pressed.  If we read 0 then the switch is
-	 * pulling the current low, i.e. it has been pressed.
-	 */
-	var state = rpio.read(cbpin) ? 'released' : 'pressed';
-	console.log('Button event on P%d (button currently %s)', cbpin, state);
+function pollcb(cbpin) {
+  /*
+   * It cannot be guaranteed that the current value of the pin is the
+   * same that triggered the event, so the best we can do is notify the
+   * user that an event happened and print what the value is currently
+   * set to.
+   *
+   * Unless you are pressing the button faster than 1ms (the default
+   * setInterval() loop which polls for events) this shouldn't be a
+   * problem.
+   *
+   * If we read 1 then the pullup resistor is pulling the current high,
+   * i.e. the switch is not pressed.  If we read 0 then the switch is
+   * pulling the current low, i.e. it has been pressed.
+   */
+  var state = rpio.read(cbpin) ? "released" : "pressed";
+  console.log("Button event on P%d (button currently %s)", cbpin, state);
 
-	/*
-	 * By default this program will run forever.  If you want to cancel the
-	 * poll after the first event and end the program, uncomment this line.
-	 */
-	// rpio.poll(cbpin, null);
+  /*
+   * By default this program will run forever.  If you want to cancel the
+   * poll after the first event and end the program, uncomment this line.
+   */
+  // rpio.poll(cbpin, null);
 }
 
 /*

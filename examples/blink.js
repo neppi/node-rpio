@@ -1,4 +1,4 @@
-var rpio = require('../lib/rpio');
+var rpio = require("../lib/rpio");
 
 /*
  * Blink an LED connected to pin 15 a few times.
@@ -20,12 +20,11 @@ rpio.open(pin, rpio.OUTPUT, rpio.LOW);
  * like this that isn't a problem and simplifies things.
  */
 for (var i = 0; i < 5; i++) {
+  /* On for 1 second */
+  rpio.write(pin, rpio.HIGH);
+  rpio.sleep(1);
 
-	/* On for 1 second */
-	rpio.write(pin, rpio.HIGH);
-	rpio.sleep(1);
-
-	/* Off for half a second (500ms) */
-	rpio.write(pin, rpio.LOW);
-	rpio.msleep(500);
+  /* Off for half a second (500ms) */
+  rpio.write(pin, rpio.LOW);
+  rpio.msleep(500);
 }

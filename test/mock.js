@@ -14,50 +14,50 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-var tap = require('tap');
-var rpio = require('../lib/rpio.js');
+var tap = require("tap");
+var rpio = require("../lib/rpio.js");
 
-tap.pass('basic tap sanity check');
+tap.pass("basic tap sanity check");
 
-tap.test('initialise mock mode', function (t) {
-	rpio.init({mock: 'raspi-3'});
-	t.end();
+tap.test("initialise mock mode", function (t) {
+  rpio.init({ mock: "raspi-3" });
+  t.end();
 });
 
-tap.test('set up custom warning handler', function (t) {
-	rpio.on('warn', function() {});
-	t.end();
+tap.test("set up custom warning handler", function (t) {
+  rpio.on("warn", function () {});
+  t.end();
 });
 
-tap.test('rpio open', function (t) {
-	rpio.open(11, rpio.INPUT, rpio.PULL_DOWN);
-	rpio.open(12, rpio.OUTPUT, rpio.HIGH);
-	rpio.open(13, rpio.OUTPUT);
-	rpio.close(11);
-	rpio.close(12);
-	rpio.close(13);
-	t.end();
+tap.test("rpio open", function (t) {
+  rpio.open(11, rpio.INPUT, rpio.PULL_DOWN);
+  rpio.open(12, rpio.OUTPUT, rpio.HIGH);
+  rpio.open(13, rpio.OUTPUT);
+  rpio.close(11);
+  rpio.close(12);
+  rpio.close(13);
+  t.end();
 });
 
-tap.test('rpio read', function (t) {
-	rpio.open(11, rpio.OUTPUT, rpio.HIGH);
-	rpio.open(12, rpio.OUTPUT);
-	tap.equal(rpio.read(11), rpio.HIGH);
-	tap.equal(rpio.read(12), rpio.LOW);
-	rpio.close(11);
-	rpio.close(12);
-	t.end();
+tap.test("rpio read", function (t) {
+  rpio.open(11, rpio.OUTPUT, rpio.HIGH);
+  rpio.open(12, rpio.OUTPUT);
+  tap.equal(rpio.read(11), rpio.HIGH);
+  tap.equal(rpio.read(12), rpio.LOW);
+  rpio.close(11);
+  rpio.close(12);
+  t.end();
 });
 
-tap.test('rpio write', function (t) {
-	rpio.open(11, rpio.OUTPUT);
-	tap.equal(rpio.write(11, rpio.HIGH), rpio.read(11));
-	rpio.close(11);
-	t.end();
+tap.test("rpio write", function (t) {
+  rpio.open(11, rpio.OUTPUT);
+  tap.equal(rpio.write(11, rpio.HIGH), rpio.read(11));
+  rpio.close(11);
+  t.end();
 });
 
-tap.test('rpio polling', function (t) {
-	rpio.poll(15, function () {});
-	rpio.poll(15, null);
-	t.end();
+tap.test("rpio polling", function (t) {
+  rpio.poll(15, function () {});
+  rpio.poll(15, null);
+  t.end();
 });
