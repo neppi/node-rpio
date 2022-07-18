@@ -1,4 +1,4 @@
-var rpio = require("../lib/rpio");
+var rpio = require('../lib/rpio');
 
 /*
  * Watch a button switch attached to the configured pin for changes.
@@ -36,8 +36,8 @@ function pollcb(cbpin) {
    * i.e. the switch is not pressed.  If we read 0 then the switch is
    * pulling the current low, i.e. it has been pressed.
    */
-  var state = rpio.read(cbpin) ? "released" : "pressed";
-  console.log("Button event on P%d (button currently %s)", cbpin, state);
+  var state = rpio.read(cbpin) ? 'released' : 'pressed';
+  console.log('Button event on P%d (button currently %s)', cbpin, state);
 
   /*
    * By default this program will run forever.  If you want to cancel the

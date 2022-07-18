@@ -1,4 +1,4 @@
-var rpio = require("../lib/rpio");
+var rpio = require('../lib/rpio');
 
 /*
  * Watch an LM393-based sound detection module on Pin 7 / GPIO 4 and print a
@@ -12,7 +12,7 @@ rpio.open(pin, rpio.INPUT);
 rpio.poll(
   pin,
   function () {
-    console.log("Could you please be a little quieter?");
+    console.log('Could you please be a little quieter?');
   },
-  rpio.POLL_LOW
+  rpio.POLL_LOW,
 );

@@ -1,4 +1,4 @@
-var rpio = require("../lib/rpio");
+var rpio = require('../lib/rpio');
 
 /*
  * Repeatedly read a DHT11 attached to Pin 7 / GPIO 4 and print out the current
@@ -82,9 +82,9 @@ function read_dht11(vals) {
    * low (short) or high (long) bit sent by the DHT11.
    */
   buf
-    .join("")
-    .replace(/0+/g, "0")
-    .split("0")
+    .join('')
+    .replace(/0+/g, '0')
+    .split('0')
     .forEach(function (bits, n) {
       data.push(bits.length);
     });
@@ -102,7 +102,7 @@ function read_dht11(vals) {
    * happen!) we treat as invalid.
    */
   if (data.length < 42 || data.length > 43) {
-    dbg("Bad data read: length=%d", data.length);
+    dbg('Bad data read: length=%d', data.length);
     return false;
   }
 
@@ -164,13 +164,13 @@ function read_dht11(vals) {
 
   /* Relative humidity range is 20 - 90% */
   if (vals[0] < 20 || vals[0] > 90) {
-    dbg("Bad humidity: %d%%", vals[0]);
+    dbg('Bad humidity: %d%%', vals[0]);
     return false;
   }
 
   /* Temperature range is 0 - 50C */
   if (vals[2] > 50) {
-    dbg("Bad temperature: %d", vals[0]);
+    dbg('Bad temperature: %d', vals[0]);
     return false;
   }
 
@@ -185,7 +185,7 @@ function read_dht11(vals) {
    * many implementations.
    */
   if (vals[0] + vals[1] + vals[2] + vals[3] != vals[4]) {
-    dbg("Bad checksum: %d:%d:%d:%d %d", v[0], v[1], v[2], v[3], v[4]);
+    dbg('Bad checksum: %d:%d:%d:%d %d', v[0], v[1], v[2], v[3], v[4]);
     return false;
   }
 
@@ -207,13 +207,7 @@ while (true) {
    * by the datasheet between samples.
    */
   if (read_dht11(v)) {
-    console.log(
-      "Temperature = %d.%dC, Humidity = %d.%d%%",
-      v[2],
-      v[3],
-      v[0],
-      v[1]
-    );
+    console.log('Temperature = %d.%dC, Humidity = %d.%d%%', v[2], v[3], v[0], v[1]);
     rpio.sleep(5);
   } else {
     rpio.sleep(1);

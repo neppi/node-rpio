@@ -1,4 +1,4 @@
-var rpio = require("../lib/rpio");
+var rpio = require('../lib/rpio');
 
 /*
  * Blink an LED connected to pin 15 a few times.

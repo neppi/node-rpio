@@ -1,4 +1,4 @@
-var rpio = require("../lib/rpio");
+var rpio = require('../lib/rpio');
 
 /*
  * Pulse an LED attached to P12 / GPIO18 5 times.
@@ -41,5 +41,5 @@ var pulse = setInterval(
   interval,
   data,
   direction,
-  times
+  times,
 );

@@ -74,7 +74,7 @@ All these examples use the physical numbering (P01-P40) and assume that the
 example is started with:
 
 ```js
-var rpio = require("rpio");
+var rpio = require('rpio');
 ```
 
 ### Read a pin
@@ -83,7 +83,7 @@ Setup pin P15 / GPIO22 for read-only input and print its current value:
 
 ```js
 rpio.open(15, rpio.INPUT);
-console.log("Pin 15 is currently " + (rpio.read(15) ? "high" : "low"));
+console.log('Pin 15 is currently ' + (rpio.read(15) ? 'high' : 'low'));
 ```
 
 ### Blink an LED
@@ -131,7 +131,7 @@ function pollcb(pin) {
 
   if (rpio.read(pin)) return;
 
-  console.log("Button pressed on pin P%d", pin);
+  console.log('Button pressed on pin P%d', pin);
 }
 
 rpio.poll(15, pollcb, rpio.POLL_LOW);
@@ -195,7 +195,7 @@ performance to match.
 Start by requiring the addon.
 
 ```js
-var rpio = require("rpio");
+var rpio = require('rpio');
 ```
 
 ### GPIO
@@ -217,7 +217,7 @@ the default option values if not called explicitly. The default values are:
 ```js
 var options = {
   gpiomem: true /* Use /dev/gpiomem */,
-  mapping: "physical" /* Use the P1-P40 numbering scheme */,
+  mapping: 'physical' /* Use the P1-P40 numbering scheme */,
   mock: undefined /* Emulate specific hardware in mock mode */,
   close_on_exit: true /* On node process exit automatically close rpio */,
 };
@@ -276,7 +276,7 @@ Examples:
 
 ```js
 rpio.init({ gpiomem: false }); /* Use /dev/mem for i²c/PWM/SPI */
-rpio.init({ mapping: "gpio" }); /* Use the GPIOxx numbering */
+rpio.init({ mapping: 'gpio' }); /* Use the GPIOxx numbering */
 ```
 
 ##### `mock`
@@ -315,10 +315,10 @@ Examples:
  * unsupported hardware, or to test scripts in a different hardware
  * environment (e.g. to check pin settings).
  */
-rpio.init({ mock: "raspi-3" });
+rpio.init({ mock: 'raspi-3' });
 
 /* Override default warn handler to avoid mock warnings */
-rpio.on("warn", function () {});
+rpio.on('warn', function () {});
 ```
 
 ##### `close_on_exit`
@@ -333,7 +333,7 @@ Example:
 ```js
 rpio.init({ close_on_exit: false });
 
-process.on("exit", function () {
+process.on('exit', function () {
   /* Insert any custom cleanup code here. */
   rpio.exit();
 });
@@ -350,7 +350,7 @@ Example:
 ```js
 rpio.init({ close_on_exit: false });
 
-process.on("exit", function () {
+process.on('exit', function () {
   /* Insert any custom cleanup code here. */
   rpio.exit();
 });
@@ -416,7 +416,7 @@ defeating the point of this feature.
 Example:
 
 ```js
-console.log("Pin 16 = %d", rpio.read(16));
+console.log('Pin 16 = %d', rpio.read(16));
 ```
 
 #### `rpio.readbuf(pin, buffer[, length[, mode]])`
@@ -514,10 +514,10 @@ var slew = (curpad & rpio.PAD_SLEW_UNLIMITED) == rpio.PAD_SLEW_UNLIMITED;
 var hysteresis = (curpad & rpio.PAD_HYSTERESIS) == rpio.PAD_HYSTERESIS;
 var drive = curpad & 0x7;
 
-console.log("GPIO Pad Control for GPIO0 - GPIO27 is currently set to:");
-console.log("\tSlew rate: " + (slew ? "unlimited" : "limited"));
-console.log("\tInput hysteresis: " + (hysteresis ? "enabled" : "disabled"));
-console.log("\tDrive rate: " + (drive * 2 + 2) + "mA");
+console.log('GPIO Pad Control for GPIO0 - GPIO27 is currently set to:');
+console.log('\tSlew rate: ' + (slew ? 'unlimited' : 'limited'));
+console.log('\tInput hysteresis: ' + (hysteresis ? 'enabled' : 'disabled'));
+console.log('\tDrive rate: ' + (drive * 2 + 2) + 'mA');
 ```
 
 #### `rpio.writepad(group, control)`
@@ -574,7 +574,7 @@ Example:
 
 ```js
 function nuke_button(pin) {
-  console.log("Nuke button on pin %d pressed", pin);
+  console.log('Nuke button on pin %d pressed', pin);
 
   /* No need to nuke more than once. */
   rpio.poll(pin, null);
@@ -582,7 +582,7 @@ function nuke_button(pin) {
 
 function regular_button(pin) {
   /* Watch pin 15 forever. */
-  console.log("Button event on pin %d, is now %d", pin, rpio.read(pin));
+  console.log('Button event on pin %d, is now %d', pin, rpio.read(pin));
 }
 
 /*
@@ -618,7 +618,7 @@ rpio.close(13, rpio.PIN_PRESERVE);
 The code below continuously flashes an LED connected to pin 15 at 100Hz.
 
 ```js
-var rpio = require("rpio");
+var rpio = require('rpio');
 
 /* Configure P15 as an output pin, setting its initial state to low */
 rpio.open(15, rpio.OUTPUT, rpio.LOW);
@@ -713,7 +713,7 @@ rpio.i2cEnd();
 The code below writes two strings to a 16x2 LCD.
 
 ```js
-var rpio = require("rpio");
+var rpio = require('rpio');
 
 /*
  * Magic numbers to initialise the i2c display device and write output,
@@ -744,7 +744,7 @@ function lcdwrite(data, mode) {
 function lineout(str, addr) {
   lcdwrite(addr, 0);
 
-  str.split("").forEach(function (c) {
+  str.split('').forEach(function (c) {
     lcdwrite(c.charCodeAt(0), 1);
   });
 }
@@ -758,8 +758,8 @@ rpio.i2cSetBaudRate(10000);
 
 for (var i = 0; i < init.length; i++) lcdwrite(init[i], 0);
 
-lineout("node.js i2c LCD!", LCD_LINE1);
-lineout("npm install rpio", LCD_LINE2);
+lineout('node.js i2c LCD!', LCD_LINE1);
+lineout('npm install rpio', LCD_LINE2);
 
 rpio.i2cEnd();
 ```
@@ -814,7 +814,7 @@ rpio.pwmSetData(12, 512);
 The code below pulses an LED 5 times before exiting.
 
 ```js
-var rpio = require("rpio");
+var rpio = require('rpio');
 
 var pin = 12; /* P12/GPIO18 */
 var range = 1024; /* LEDs can quickly hit max brightness, so only use */
@@ -853,7 +853,7 @@ var pulse = setInterval(
   interval,
   data,
   direction,
-  times
+  times,
 );
 ```
 
@@ -957,7 +957,7 @@ rpio.spiEnd();
 The code below reads the 128x8 contents of an AT93C46 serial EEPROM.
 
 ```js
-var rpio = require("rpio");
+var rpio = require('rpio');
 
 rpio.spiBegin();
 rpio.spiChipSelect(0); /* Use CE0 */
@@ -986,7 +986,7 @@ for (i = 0; i < 128; i++, ++j) {
   tx[1] = i;
   rpio.spiTransfer(tx, rx, 4);
   out = (rx[2] << 1) | (rx[3] >> 7);
-  process.stdout.write(out.toString(16) + (j % 16 == 0 ? "\n" : " "));
+  process.stdout.write(out.toString(16) + (j % 16 == 0 ? '\n' : ' '));
 }
 rpio.spiEnd();
 ```
@@ -1016,12 +1016,12 @@ If you want to use this library in a container you will face the problem of auto
 i.e. for docker-compose.yml
 
 ```yml
-version: "2.3"
+version: '2.3'
 
 services:
   myservice:
     restart: always
-    image: "image_with_gpio"
+    image: 'image_with_gpio'
     environment:
       - DEVICE_MODEL_STRING="Raspberry Pi 4 Model B Rev 1.4" # extracted from '/sys/firmware/devicetree/base/model
 ```

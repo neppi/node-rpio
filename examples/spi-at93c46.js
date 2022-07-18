@@ -1,4 +1,4 @@
-var rpio = require("../lib/rpio");
+var rpio = require('../lib/rpio');
 
 /*
  * Read data from an SPI-attached AT93C46 EEPROM.
@@ -30,6 +30,6 @@ for (i = 0; i < 128; i++, ++j) {
   tx[1] = i;
   rpio.spiTransfer(tx, rx, 4);
   out = (rx[2] << 1) | (rx[3] >> 7);
-  process.stdout.write(out.toString(16) + (j % 16 == 0 ? "\n" : " "));
+  process.stdout.write(out.toString(16) + (j % 16 == 0 ? '\n' : ' '));
 }
 rpio.spiEnd();

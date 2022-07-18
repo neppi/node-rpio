@@ -1,4 +1,4 @@
-var rpio = require("../lib/rpio");
+var rpio = require('../lib/rpio');
 
 /*
  * Magic numbers to initialise the i2c display device and write output,
@@ -30,7 +30,7 @@ function lcdwrite(data, mode) {
 function lineout(str, addr) {
   lcdwrite(addr, 0);
 
-  str.split("").forEach(function (c) {
+  str.split('').forEach(function (c) {
     lcdwrite(c.charCodeAt(0), 1);
   });
 }
@@ -44,7 +44,7 @@ rpio.i2cSetBaudRate(10000);
 
 for (var i = 0; i < init.length; i++) lcdwrite(init[i], 0);
 
-lineout("node.js i2c LCD!", LCD_LINE1);
-lineout("npm install rpio", LCD_LINE2);
+lineout('node.js i2c LCD!', LCD_LINE1);
+lineout('npm install rpio', LCD_LINE2);
 
 rpio.i2cEnd();
